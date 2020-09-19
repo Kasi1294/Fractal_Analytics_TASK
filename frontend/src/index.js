@@ -15,7 +15,7 @@ const store = createStore(RootReducer);
 
 const useStyles = makeStyles((theme) => ({
   fieldSpace: {
-    padding: "0px 8px 10px 8px",
+    padding: "8px 8px 10px 8px",
   },
   searchSpace: {
     padding: "24px 24px 0px 24px",

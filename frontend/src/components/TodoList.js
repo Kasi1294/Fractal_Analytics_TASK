@@ -12,7 +12,10 @@ import green from '@material-ui/core/colors/green';
 const useStyles = makeStyles((theme) => ({
   saveButton:{
     backgroundColor: "#00ff72e0"
-  }
+  },
+  ButtonPadding: {
+    padding: theme.spacing(2),
+  },
 }))
 const TodoList = () => {
   const classes = useStyles();
@@ -33,7 +36,7 @@ const TodoList = () => {
           <TodoItem key={todo.id} {...todo} />
         ))}
       </Typography>
-      <div align= "center">
+      <div align= "center" className={classes.ButtonPadding}>
         <Button variant="contained" className={classes.saveButton} onClick={handleClearList} startIcon={<SaveSharpIcon />}>
           SAVE
         </Button>

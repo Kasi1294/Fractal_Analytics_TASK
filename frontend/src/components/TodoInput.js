@@ -27,7 +27,7 @@ const TodoInput = () => {
 
   return (
     <FormControl fullWidth variant="outlined">
-      <InputLabel htmlFor="outlined-adornment-amount">PUT SOME TODO</InputLabel>
+      <InputLabel htmlFor="todo">PUT SOME TODO</InputLabel>
       <OutlinedInput
         id="todo"
         value={text}
