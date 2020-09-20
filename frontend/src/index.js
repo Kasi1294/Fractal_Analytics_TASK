@@ -22,15 +22,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-let key = 0;
-
 function App() {
   const classes = useStyles();
   return (
     <Provider store={store}>
       <Container fixed={true} maxWidth={"md"} className={classes.searchSpace}>
         <Paper elevation={1} className={classes.fieldSpace}>
-          <TodoInput key={key++}/>
+          <TodoInput />
         </Paper>
         <TodoList />
       </Container>

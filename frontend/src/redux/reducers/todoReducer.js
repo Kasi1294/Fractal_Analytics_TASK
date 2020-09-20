@@ -20,7 +20,7 @@ const todoReducer = (state = initalState, action) => {
         list: [
           ...state.list,
           {
-            todoId: state.list.length + 1,
+            todoId: state.list.length,
             text: action.text,
             completed: action.completed,
           },
