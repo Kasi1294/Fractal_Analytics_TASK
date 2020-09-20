@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
-import RootReducer from "./redux/reducers/index";
+import RootReducer from "./redux/reducers/rootReducer";
 import TodoList from "./components/TodoList";
 import TodoInput from "./components/TodoInput";
 import Container from "@material-ui/core/Container";
@@ -11,7 +11,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import "./styles.css";
 
-const store = createStore(RootReducer);
+const store = createStore(RootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__( ));
 
 const useStyles = makeStyles((theme) => ({
   fieldSpace: {
@@ -21,13 +21,16 @@ const useStyles = makeStyles((theme) => ({
     padding: "24px 24px 0px 24px",
   },
 }))
+
+let key = 0;
+
 function App() {
   const classes = useStyles();
   return (
     <Provider store={store}>
       <Container fixed={true} maxWidth={"md"} className={classes.searchSpace}>
         <Paper elevation={1} className={classes.fieldSpace}>
-          <TodoInput />
+          <TodoInput key={key++}/>
         </Paper>
         <TodoList />
       </Container>

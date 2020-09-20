@@ -1,28 +1,39 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { addTodo } from "../redux/actions/index";
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import IconButton from '@material-ui/core/IconButton';
-import AddCircleIcon from '@material-ui/icons/AddCircle';
-import ListSharpIcon from '@material-ui/icons/ListSharp';
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { addTodo , updateTodo} from "../redux/actions/todoActions";
+import FormControl from "@material-ui/core/FormControl";
+import InputLabel from "@material-ui/core/InputLabel";
+import OutlinedInput from "@material-ui/core/OutlinedInput";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import IconButton from "@material-ui/core/IconButton";
+import AddCircleIcon from "@material-ui/icons/AddCircle";
+import SaveIcon from "@material-ui/icons/Save";
 
 const TodoInput = () => {
-  const [text, setText] = useState("");
-  const todos = useSelector((state) => state.todos);
-
+  
   const dispatch = useDispatch();
+  
+  const selectedItem = useSelector((state) => {
+    console.log("State: ", state);
+    return state.todoReducer.selectedItem;
+  });
+  
+  const isAdd = Object.keys(selectedItem).length === 0 ? true: false
 
-  const handleSubmit = (event) => {
-    if (text !== "") {
-      dispatch(addTodo(text));
-      setText("");
-    } else {
-      // alert("cant not to empty text");
-    }
+  const itemText = isAdd ? "": selectedItem.text
+
+  const [text, setText] = useState(itemText);
+
+  useEffect(() => {
+    setText(itemText)
+  }, [itemText])
+  
+  const onAddTodoList = (event) => {
     event.preventDefault();
+    if (text !== "") {
+      isAdd ? dispatch(addTodo(text, false)) : dispatch(updateTodo(text, selectedItem.todoId));
+      setText("");
+    }
   };
 
   return (
@@ -31,15 +42,18 @@ const TodoInput = () => {
       <OutlinedInput
         id="todo"
         value={text}
-        onChange={event => setText(event.target.value)}
+        onChange={(event) => setText(event.target.value)}
         endAdornment={
           <InputAdornment position="end">
-            <IconButton>
-              <AddCircleIcon color="primary" onClick={handleSubmit}/>
-            </IconButton>
-            <IconButton>
-              <ListSharpIcon color="primary" onClick={handleSubmit}/>
-            </IconButton>
+            {Object.keys(selectedItem).length === 0 ? (
+              <IconButton>
+                <AddCircleIcon color="primary" onClick={onAddTodoList} />
+              </IconButton>
+            ) : (
+              <IconButton>
+                <SaveIcon color="primary" onClick={onAddTodoList} />
+              </IconButton>
+            )}
           </InputAdornment>
         }
         labelWidth={135}

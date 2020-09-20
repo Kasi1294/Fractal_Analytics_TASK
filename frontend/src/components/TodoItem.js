@@ -1,13 +1,13 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { deleteTodo, toggleTodo } from "../redux/actions/index";
+import { deleteTodo, selectTodo, toggleTodo } from "../redux/actions/todoActions";
 import Typography from "@material-ui/core/Typography";
 import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
 import DeleteIcon from "@material-ui/icons/Delete";
 import IconButton from "@material-ui/core/IconButton";
 import EditTwoToneIcon from "@material-ui/icons/EditTwoTone";
 
-const TodoItem = ({ id, text, completed }) => {
+const TodoItem = ({todoId, text, completed }) => {
   const dispatch = useDispatch();
 
   const changeBackground = (e, text) => {
@@ -22,11 +22,15 @@ const TodoItem = ({ id, text, completed }) => {
   };
 
   const handleDelete = () => {
-    dispatch(deleteTodo(id));
+    dispatch(deleteTodo(todoId));
+  };
+
+  const handleEdit = () => {
+    dispatch(selectTodo({ todoId, text, completed }));
   };
 
   const hanldeToggle = () => {
-    dispatch(toggleTodo(id));
+    dispatch(toggleTodo(todoId));
   };
 
   return (
@@ -41,7 +45,7 @@ const TodoItem = ({ id, text, completed }) => {
           <CheckCircleOutlineIcon onClick={hanldeToggle} color="primary" />
         </IconButton>
         <IconButton>
-          <EditTwoToneIcon onClick={handleDelete} color="action" />
+          <EditTwoToneIcon onClick={handleEdit} color="action" />
         </IconButton>
         <IconButton>
           <DeleteIcon onClick={handleDelete} color="secondary" />
