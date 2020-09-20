@@ -10,8 +10,8 @@ import EditTwoToneIcon from "@material-ui/icons/EditTwoTone";
 const TodoItem = ({todoId, text, completed }) => {
   const dispatch = useDispatch();
 
-  const changeBackground = (e, text) => {
-    e.target.style.borderStyle = text;
+  const changeBackground = (event, text) => {
+    event.target.style.borderStyle = text;
   };
 
   const styled = {
@@ -37,8 +37,8 @@ const TodoItem = ({todoId, text, completed }) => {
     <div style={styled}>
       <Typography
         variant="h6"
-        onMouseEnter={(e) => changeBackground(e, "groove")}
-        onMouseLeave={(e) => changeBackground(e, "none")}
+        onMouseEnter={(e) => changeBackground(value, "groove")}
+        onMouseLeave={(e) => changeBackground(value, "none")}
       >
         {text}
         <IconButton>

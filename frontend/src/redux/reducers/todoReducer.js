@@ -1,10 +1,10 @@
 import {
   ADD_TODO,
-  CLEAR_TODO_LIST,
-  DELETE_TODO,
-  TOGGLE_TODO,
   SELECT_TODO,
   UPDATE_TODO,
+  DELETE_TODO,
+  TOGGLE_TODO,
+  CLEAR_TODO_LIST,
 } from "../actions/actions.types";
 
 const initalState = {
@@ -35,23 +35,25 @@ const todoReducer = (state = initalState, action) => {
 
     case UPDATE_TODO:
       const { todoId, text } = action;
-      let todoList = state.list
+      let todoList = state.list;
       for (const todo of todoList) {
-        if(todo.todoId === todoId){
-          todo.text = text
+        if (todo.todoId === todoId) {
+          todo.text = text;
           break;
         }
       }
-      return {...state, list:[...todoList], selectedItem: {}};
+      return { ...state, list: [...todoList], selectedItem: {} };
 
     case CLEAR_TODO_LIST:
       return initalState;
+
     case DELETE_TODO:
       return {
         ...state,
         list: state.list.filter((item) => item.todoId !== action.todoId),
-        selectedItem: {}
+        selectedItem: {},
       };
+
     case TOGGLE_TODO:
       return {
         ...state,
@@ -61,6 +63,7 @@ const todoReducer = (state = initalState, action) => {
             : todo
         ),
       };
+
     default:
       return state;
   }

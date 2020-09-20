@@ -17,28 +17,31 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
   },
 }));
+
 const TodoList = () => {
   const classes = useStyles();
-  const list = useSelector((state) => {
-   // console.log("State: ", state);
+
+  const dispatch = useDispatch();
+
+  const accent = green["800"];
+
+  const todoList = useSelector((state) => {
     return state.todoReducer.list;
   });
-  const dispatch = useDispatch();
 
   const handleClearList = () => {
     dispatch(clearTodoList());
   };
 
-  const accent = green["800"];
-
   return (
     <div>
       <Typography variant="h4" align="center">
-        {list.map((todo) => (
+        {todoList.map((todo) => (
           (todo.text !== "" ) ?
             <TodoItem key={todo.id} {...todo} /> : ""
         ))}
       </Typography>
+      
       <div align="center" className={classes.ButtonPadding}>
         <Button
           variant="contained"
