@@ -5,6 +5,8 @@ import {
   DELETE_TODO,
   TOGGLE_TODO,
   CLEAR_TODO_LIST,
+  SAVE_TODO_SAGA,
+  INITIAL_LOAD_SAGA,
 } from "../actions/actions.types";
 
 const initalState = {
@@ -14,6 +16,13 @@ const initalState = {
 
 const todoReducer = (state = initalState, action) => {
   switch (action.type) {
+    case SAVE_TODO_SAGA:
+    case INITIAL_LOAD_SAGA:
+      return {
+        ...state,
+        list: [...action.allTodo],
+      };
+
     case ADD_TODO:
       return {
         ...state,

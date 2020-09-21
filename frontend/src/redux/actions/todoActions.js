@@ -4,8 +4,16 @@ import {
   DELETE_TODO,
   TOGGLE_TODO,
   SELECT_TODO,
-  UPDATE_TODO
+  UPDATE_TODO,
+  INITIAL_LOAD,
+  SAVE_TODO,
 } from "./actions.types";
+
+export const initialLoad = () => {
+  return {
+    type: INITIAL_LOAD,
+  };
+};
 
 export const addTodo = (text, completed) => {
   return {
@@ -18,7 +26,7 @@ export const addTodo = (text, completed) => {
 export const selectTodo = (payLoad) => {
   return {
     type: SELECT_TODO,
-    payLoad
+    payLoad,
   };
 };
 
@@ -26,7 +34,7 @@ export const updateTodo = (text, todoId) => {
   return {
     type: UPDATE_TODO,
     text,
-    todoId
+    todoId,
   };
 };
 
@@ -47,5 +55,12 @@ export const toggleTodo = (todoId) => {
   return {
     type: TOGGLE_TODO,
     todoId,
+  };
+};
+
+export const saveTodo = (savePayload) => {
+  return {
+    type: SAVE_TODO,
+    savePayload,
   };
 };

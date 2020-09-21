@@ -7,7 +7,7 @@ import OutlinedInput from "@material-ui/core/OutlinedInput";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import IconButton from "@material-ui/core/IconButton";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
-import SaveIcon from "@material-ui/icons/Save";
+import CheckIcon from '@material-ui/icons/Check';
 
 const TodoInput = () => {
   
@@ -51,7 +51,7 @@ const TodoInput = () => {
               </IconButton>
             ) : (
               <IconButton>
-                <SaveIcon color="primary" onClick={onAddTodoList} />
+                <CheckIcon color="primary" onClick={onAddTodoList} />
               </IconButton>
             )}
           </InputAdornment>

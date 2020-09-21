@@ -1,7 +1,7 @@
-import React from "react";
+import React, {useEffect} from "react";
 import TodoItem from "./TodoItem";
 import { useSelector, useDispatch } from "react-redux";
-import { clearTodoList } from "../redux/actions/todoActions";
+import { clearTodoList, initialLoad , saveTodo} from "../redux/actions/todoActions";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
@@ -33,6 +33,13 @@ const TodoList = () => {
     dispatch(clearTodoList());
   };
 
+  const handleSave = () => {
+    dispatch(saveTodo(todoList));
+  };
+  
+  useEffect(() => {
+    dispatch(initialLoad());
+  }, [])
   return (
     <div>
       <Typography variant="h4" align="center">
@@ -47,7 +54,7 @@ const TodoList = () => {
           variant="contained"
           color={accent}
           className={classes.saveButton}
-          onClick={handleClearList}
+          onClick={handleSave}
           startIcon={<SaveSharpIcon />}
         >
           SAVE

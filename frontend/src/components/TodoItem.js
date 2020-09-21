@@ -37,8 +37,8 @@ const TodoItem = ({todoId, text, completed }) => {
     <div style={styled}>
       <Typography
         variant="h6"
-        onMouseEnter={(e) => changeBackground(value, "groove")}
-        onMouseLeave={(e) => changeBackground(value, "none")}
+        onMouseEnter={(value) => changeBackground(value, "groove")}
+        onMouseLeave={(value) => changeBackground(value, "none")}
       >
         {text}
         <IconButton>

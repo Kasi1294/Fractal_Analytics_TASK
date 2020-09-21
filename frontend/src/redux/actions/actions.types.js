@@ -4,3 +4,7 @@ export const TOGGLE_TODO = "TOGGLE_TODO";
 export const SELECT_TODO = "SELECT_TODO";
 export const UPDATE_TODO = "UPDATE_TODO";
 export const CLEAR_TODO_LIST = "CLEAR_TODO_LIST";
+export const INITIAL_LOAD = "INITIAL_LOAD";
+export const INITIAL_LOAD_SAGA = "INITIAL_LOAD_SAGA";
+export const SAVE_TODO = "SAVE_TODO";
+export const SAVE_TODO_SAGA = "SAVE_TODO_SAGA";

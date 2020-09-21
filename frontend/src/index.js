@@ -1,15 +1,26 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import { createStore } from "redux";
-import RootReducer from "./redux/reducers/rootReducer";
-import TodoList from "./components/TodoList";
-import TodoInput from "./components/TodoInput";
+import { createStore, applyMiddleware } from "redux";
 import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
+import createMiddleWare from "redux-saga";
 
-const store = createStore(RootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__( ));
+import RootReducer from "./redux/reducers/rootReducer";
+import TodoList from "./components/TodoList";
+import TodoInput from "./components/TodoInput";
+import rootSaga from "./saga/rootSaga";
+
+const sagaMiddleWare = createMiddleWare()
+
+
+const store = createStore(
+  RootReducer,
+  applyMiddleware(sagaMiddleWare)
+  );
+  
+  sagaMiddleWare.run(rootSaga);
 
 const useStyles = makeStyles((theme) => ({
   fieldSpace: {
@@ -18,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
   searchSpace: {
     padding: "24px 24px 0px 24px",
   },
-}))
+}));
 
 function App() {
   const classes = useStyles();
