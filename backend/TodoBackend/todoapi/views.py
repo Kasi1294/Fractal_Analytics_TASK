@@ -16,14 +16,22 @@ class TodoViewSet(viewsets.ModelViewSet):
     queryset = Todo.objects.all().order_by('todoId')
     serializer_class = TodoSerializer
 
+"""
+getAllData is a function used to get all todo
+"""
 def getAllData():
     allTodo = TodoSerializer(Todo.objects.all(), many=True)
     return allTodo.data
 
+"""
+deleteAllData is a function used to delete all todo
+"""
 def deleteAllData():
     Todo.objects.all().delete()
     return
-
+"""
+GetAllTodoList handle the GET request for all todo
+"""
 @api_view(['GET', 'POST', 'DELETE'])
 def GetAllTodoList(request):
     if request.method == 'GET':
@@ -31,6 +39,9 @@ def GetAllTodoList(request):
     else :
         return JsonResponse(allTodo.errors, status=status.HTTP_400_BAD_REQUEST)
 
+"""
+PostAllTodoList handle the POST request for all todo
+"""
 @api_view(['GET', 'POST', 'DELETE'])
 def PostAllTodoList(request):
     if request.method == 'POST':
