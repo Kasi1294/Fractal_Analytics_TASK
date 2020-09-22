@@ -9,11 +9,21 @@ import {
   INITIAL_LOAD_SAGA,
 } from "../actions/actions.types";
 
+//Inital state for the TODO application
 const initalState = {
   selectedItem: {},
   list: [{ todoId: 0, text: "", completed: false }],
 };
 
+{
+  /**
+   * todoReducer is a reducer function for TODO app
+   * 
+   * @param{state} default value is inital state
+   * @param{action} action dispatch from UI 
+   * @return {object} new state
+   */
+}
 const todoReducer = (state = initalState, action) => {
   switch (action.type) {
     case SAVE_TODO_SAGA:

@@ -1,6 +1,12 @@
 import { takeEvery, put } from "redux-saga/effects";
 
-function* initialLoadSaga() {
+{/*
+* getAllTodo function is used to get all todo from backend
+* 
+* @error {error} Error from backend
+* @return {allTodo} List of todo
+*/}
+function* getAllTodo() {
   try {
     const response = yield fetch(
       "http://localhost:8000/todo/getAll"
@@ -12,9 +18,15 @@ function* initialLoadSaga() {
   }
 }
 
-function* saveTodoSaga(savePayLoad) {
+{/*
+* saveAllTodo function is used to save all todo in backend
+* 
+* @param {savePayLoad} List of todo to save
+* @error {error} Error from backend
+* @return {allTodo} List of todo from backend after save
+*/}
+function* saveAllTodo(savePayLoad) {
   try {
-    console.log(savePayLoad);
     const url = "http://localhost:8000/todo/postAll";
     const payLoad = {
       method: "post",
@@ -34,10 +46,12 @@ function* saveTodoSaga(savePayLoad) {
   }
 }
 
+//initialLoad function used to call getAllTodo
 export function* initialLoad() {
-  yield takeEvery("INITIAL_LOAD", initialLoadSaga);
+  yield takeEvery("INITIAL_LOAD", getAllTodo);
 }
 
+//saveTodo function is used to call saveAllTodo
 export function* saveTodo() {
-  yield takeEvery("SAVE_TODO", saveTodoSaga);
+  yield takeEvery("SAVE_TODO", saveAllTodo);
 }

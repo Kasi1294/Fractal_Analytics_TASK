@@ -7,27 +7,44 @@ import OutlinedInput from "@material-ui/core/OutlinedInput";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import IconButton from "@material-ui/core/IconButton";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
-import CheckIcon from '@material-ui/icons/Check';
+import Button from "@material-ui/core/Button";
 
+{
+  /**
+   * TodoInput is the react function component 
+   * for input a todo in both add and update
+   * 
+   * @return{react text input for both add and update}
+   */
+}
 const TodoInput = () => {
-  
+  // dispatch - redux dispatch function
   const dispatch = useDispatch();
   
+  //selectedItem - current selected item for edit
   const selectedItem = useSelector((state) => {
-    console.log("State: ", state);
     return state.todoReducer.selectedItem;
   });
   
+  //isAdd - find current todo is add or update
   const isAdd = Object.keys(selectedItem).length === 0 ? true: false
 
+  //itemText - todo text in both add and update
   const itemText = isAdd ? "": selectedItem.text
 
+  //text - todo text, setText - to set the text state
   const [text, setText] = useState(itemText);
 
+  //To set the text when itemText is changed
   useEffect(() => {
     setText(itemText)
   }, [itemText])
   
+  {
+    /**
+     * onAddTodoList is function used to handle the todo add
+     */
+  }
   const onAddTodoList = (event) => {
     event.preventDefault();
     if (text !== "") {
@@ -50,9 +67,9 @@ const TodoInput = () => {
                 <AddCircleIcon color="primary" onClick={onAddTodoList} />
               </IconButton>
             ) : (
-              <IconButton>
-                <CheckIcon color="primary" onClick={onAddTodoList} />
-              </IconButton>
+              <Button variant="contained" color="primary" onClick={onAddTodoList}>
+              OK
+              </Button>
             )}
           </InputAdornment>
         }
